@@ -1,0 +1,316 @@
+/* Body Background */
+body {
+  height: 100%;
+  background-image: url("../assets/images/23651431_22.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  margin-top: 60px;
+  
+}
+
+/* Navbar Styles */
+nav {
+  background-color: black;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav h1 {
+  display: inline;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+nav ul {
+  display: flex; /* Default layout: horizontal */
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-family: "Segoe UI", sans-serif;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 0;
+  transition: color 300ms, border-bottom 300ms;
+}
+
+nav ul li a:hover {
+  color: #138dce;
+  border-bottom: 1px solid #138dce;
+}
+
+nav div img {
+  width: 40px;
+  border-radius: 10px;
+}
+
+.menu-icon {
+  font-size: 28px;
+  display: none; /* Hidden by default on larger screens */
+  cursor: pointer;
+  color: white;
+  
+}
+
+.menu-icon i.ph-list {
+  display: block;
+
+}
+
+.menu-icon i.ph-x {
+  display: none; /* Hide "X" icon by default */
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  nav ul {
+    display: none; /* Hide menu by default */
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav ul.show {
+    display: flex; /* Show menu when "show" class is added */
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-icon.active i.ph-list {
+    display: none;
+    
+}
+
+  .menu-icon.active i.ph-x {
+    display: block;   
+}
+  .col-md-4{
+    text-align: center;
+}
+
+  .title{
+    margin-top:2cm;
+  }
+}
+
+/* title Syles */
+.title{
+  text-align: center;
+  color: white;
+}
+
+
+/* Search Input Styles */
+.search {
+  background-color: white;
+  color: black;
+  border: solid rgb(255, 255, 255);
+  border-radius: 5px;
+  transition: background-color 0.5s, color 0.5s, border 0.5s;
+}
+
+.search:hover {
+  background-color: black;
+  color: white;
+  border: solid gray;
+}
+
+/* Card Layout */
+.card {
+  margin-bottom: 20px; 
+}
+
+
+.col-md-4 {
+  padding: 0 15px; /* Adjust padding for spacing */
+  margin-bottom: 25px;
+}
+
+/* text */
+
+.text-center.mt-10{
+  color: white;
+}
+
+.error h1{
+  color: white;
+}
+
+/* Ensure the body takes up at least 100% of the viewport height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Flexbox container for the body to ensure the footer stays at the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content should take up all available space */
+#main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  flex: 1;
+}
+
+#pagination {
+  margin-top: 20px;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 5px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+
+/* Styling for the Previous button */
+.btn-prev {
+  background-color: whitesmoke;
+  color: #333;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  position: relative;
+  border: 2px solid #252525;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}
+
+/* Styling for the Next button */
+.btn-next {
+  background-color: whitesmoke;
+  position: relative;
+  color: #333;
+  padding: 10px 20px;
+  border: 2px solid #252525;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}
+
+/* Hover effect for both buttons */
+.btn-prev:hover, .btn-next:hover { 
+  box-shadow: 1px 1px 100px #252525;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  border:  2px solid white;
+  
+}
+
+/* Disabled button styling */
+.btn-prev[disabled], .btn-next[disabled] {
+  box-shadow: none;
+  background-color: #bdc3c7; 
+  color: #7f8c8d;            
+  cursor: not-allowed;
+  border: 2px solid #252525;       
+}
+
+.btn-page-number {
+  text-shadow: 1px 2px #8d8989;
+  display: inline;
+  border: none;
+  background: none;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 20px
+}
+
+.btn-page-number.btn-primary {
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+.btn-page-number.btn-secondary {
+  font-weight: normal;
+  color: rgb(0, 0, 0);
+}
+
+
+/* Modal Styles */
+
+.list-group {
+  list-style-type: disc;
+  padding-left: 1.5em; 
+}
+
+.list-group li::marker {
+  color: black; 
+}
+
