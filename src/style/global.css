@@ -33,6 +33,7 @@ nav h1 {
 }
 
 nav ul {
+  align-items: center;
   display: flex; /* Default layout: horizontal */
   gap: 2rem;
   list-style: none;
