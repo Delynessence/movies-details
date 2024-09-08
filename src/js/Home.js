@@ -79,7 +79,7 @@ function displayMovies(movies) {
     movies.forEach(movie => {
         if (movie.Response === "True") {
             movieContainer.append(`
-                <div class="col-md-3 mb-3">
+                <div class="">
                     <div class="card">
                         <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
                         <div class="card-body">
