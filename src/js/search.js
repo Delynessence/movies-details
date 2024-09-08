@@ -49,7 +49,7 @@ document.querySelectorAll("nav ul a").forEach(item => {
                     // Menampilkan film yang diperoleh dari API
                     $.each(movies, function(i, data) {
                         $('#movie-list').append(`
-                            <div class="col-md-3 mb-3">
+                            <div class="">
                                 <div class="card">
                                     <img src="${data.Poster}" class="card-img-top" alt="${data.Title}">
                                     <div class="card-body">

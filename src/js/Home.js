@@ -147,7 +147,7 @@ $('#movie-recomandation').on('click', '.see-detail', function() {
                 $('.modal-body').html(`
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-4 ">
                                 <img src="${movie.Poster}" class="img-fluid" alt="${movie.Title} Poster">
                             </div>
                             <div class="col-md-8">

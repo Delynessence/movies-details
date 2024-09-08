@@ -1,13 +1,13 @@
 /* Body Background */
-body {
+html, body {
   height: 100%;
   background-image: url("../assets/images/23651431_22.jpg");
   background-size: cover;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
-  margin-top: 60px;
-  
+  display: flex;
+  flex-direction: column;
 }
 
 /* Navbar Styles */
@@ -74,52 +74,7 @@ nav div img {
 }
 
 .menu-icon i.ph-x {
-  display: none; /* Hide "X" icon by default */
-}
-
-/* Responsive Styles */
-@media only screen and (max-width: 768px) {
-  nav {
-    flex-wrap: wrap;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-
-  nav ul {
-    display: none; /* Hide menu by default */
-    flex-direction: column;
-    width: 100%;
-  }
-
-  nav ul.show {
-    display: flex; /* Show menu when "show" class is added */
-  }
-
-  .menu-icon {
-    display: flex;
-    align-items: center;
-  }
-
-  .menu-icon.active i.ph-list {
-    display: none;
-    
-}
-
-  .menu-icon.active i.ph-x {
-    display: block;   
-}
-  .col-md-4{
-    text-align: center;
-}
-
-  .title{
-    margin-top:2cm;
-  }
-
-  
-
+  display: none; 
 }
 
 /* title Syles */
@@ -127,7 +82,6 @@ nav div img {
   text-align: center;
   color: white;
 }
-
 
 /* Search Input Styles */
 .search {
@@ -144,17 +98,6 @@ nav div img {
   border: solid gray;
 }
 
-/* Card Layout */
-.card {
-  margin-bottom: 20px; 
-}
-
-
-.col-md-4 {
-  padding: 0 15px; /* Adjust padding for spacing */
-  margin-bottom: 25px;
-}
-
 /* text */
 
 .text-center.mt-10{
@@ -163,18 +106,6 @@ nav div img {
 
 .error h1{
   color: white;
-}
-
-/* Ensure the body takes up at least 100% of the viewport height */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-/* Flexbox container for the body to ensure the footer stays at the bottom */
-body {
-  display: flex;
-  flex-direction: column;
 }
 
 /* Main content should take up all available space */
@@ -231,7 +162,6 @@ footer {
   text-decoration: underline;
 }
 
-
 /* Styling for the Previous button */
 .btn-prev {
   background-color: whitesmoke;
@@ -275,7 +205,6 @@ footer {
   
 }
 
-/* Disabled button styling */
 .btn-prev[disabled], .btn-next[disabled] {
   box-shadow: none;
   background-color: #bdc3c7; 
@@ -306,7 +235,6 @@ footer {
   color: rgb(0, 0, 0);
 }
 
-
 /* Modal Styles */
 
 .list-group {
@@ -327,8 +255,8 @@ footer {
   gap: 0.5rem;
 }
 .card {
-  width: 270px;
-  height: 550px;
+  width: 16.8rem;
+  height: 34.3rem;
   background: #07182E;
   position: relative;
   display: flex;
@@ -336,15 +264,11 @@ footer {
   place-items: left;
   overflow: hidden;
   border-radius: 20px;
-  /* flex-basis: calc(25% - 10px);
-  margin: 5px; */
 }
-
 
 .card img{
   border-radius: 20px;
   z-index: 1;
-  justify-content: center;
   width: 100%;
   height: 12cm;
   padding: 3px;
@@ -354,6 +278,7 @@ footer {
   color: white;
   z-index: 1;
   background-color: #07182E;
+  
 }
 
 .card::before {
@@ -388,8 +313,6 @@ footer {
 }
 
 /* STYLE BUTTON SEE-DETAIL */
-
-
 .btn-detail {
   position: relative;
   transition: all 0.3s ease-in-out;
@@ -457,5 +380,47 @@ footer {
 
   to {
     left: 100%;
+  }
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  nav ul {
+    display: none; /* Hide menu by default */
+    flex-direction: column;
+    width: 100%;
+  }
+
+  nav ul.show {
+    display: flex; /* Show menu when "show" class is added */
+  }
+
+  .menu-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-icon.active i.ph-list {
+    display: none;
+    
+}
+
+  .menu-icon.active i.ph-x {
+    display: block;   
+}
+  .col-md-4{
+    text-align: center;
+}
+
+  .title{
+    margin-top:2cm;
   }
 }
