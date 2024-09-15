@@ -147,13 +147,13 @@ $('#movie-recomandation').on('click', '.see-detail', function() {
                 $('.modal-body').html(`
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4 ">
+                            <div class="col-md-4" id="poster">
                                 <img src="${movie.Poster}" class="img-fluid" alt="${movie.Title} Poster">
                             </div>
                             <div class="col-md-8">
                                 <ul class="list-group">
                                     <li class="list-group-item"><strong>Movie Title:</strong> ${movie.Title}</li>
-                                    <li class="list-group-item"><strong>Year:</strong> ${movie.Year}</li>
+                                    <li class="list-group-item" ><strong>Year:</strong> ${movie.Year}</li>
                                     <li class="list-group-item"><strong>Released:</strong> ${movie.Released}</li>
                                     <li class="list-group-item"><strong>Genres:</strong> ${movie.Genre}</li>
                                     <li class="list-group-item"><strong>Type:</strong> ${movie.Type}</li>
