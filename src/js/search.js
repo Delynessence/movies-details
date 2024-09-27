@@ -177,7 +177,7 @@ $('#movie-list').on('click', '.see-detail', function (event) {
                 $('.modal-body').html(`
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div id="poster">
                                 <img src="${movie.Poster}" class="img-fluid" alt="${movie.Title} Poster">
                             </div>
                             <div class="col-md-8">

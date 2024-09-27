@@ -15,7 +15,6 @@ document.querySelectorAll("nav ul a").forEach(item => {
     });
 });
 
-
 // API Configuration
 const tmdbApiKey = '06a4f82067c070ae689a3b3e945e4ffb'; // Replace with your TMDb API Key
 let currentPage = 1;
@@ -147,7 +146,7 @@ $('#movie-recomandation').on('click', '.see-detail', function() {
                 $('.modal-body').html(`
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4" id="poster">
+                            <div id="poster">
                                 <img src="${movie.Poster}" class="img-fluid" alt="${movie.Title} Poster">
                             </div>
                             <div class="col-md-8">
