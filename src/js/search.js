@@ -1,27 +1,30 @@
-// Menu Toggle Logic
+// Menu Toggle Logic untuk menampilkan dan menyembunyikan menu
 const menuIcon = document.getElementById("menu-icon");
-const menuList = document.querySelector("nav ul"); // Updated to match the CSS selector
+const menuList = document.querySelector("nav ul");
 
 menuIcon.addEventListener("click", () => {
+    // Menambah/menghapus class untuk menunjukkan menu dan animasi ikon
     menuList.classList.toggle("show");
     menuIcon.classList.toggle("active");
 });
 
-// Get all menu items and close the menu on item click
+// Logika untuk menutup menu ketika salah satu item menu diklik
 document.querySelectorAll("nav ul a").forEach(item => {
     item.addEventListener("click", () => {
+        // Menghilangkan class 'show' dan 'active' saat item menu diklik
         menuList.classList.remove("show");
         menuIcon.classList.remove("active");
     });
 
-    
+    // Variabel untuk melacak halaman saat ini
     let currentPage = 1;
 
-    // Fungsi untuk mengambil dan menampilkan film berdasarkan halaman
+    // Fungsi untuk mengambil film berdasarkan halaman dan query pencarian
     function fetchMovies(page) {
-        const searchQuery = $('#search-input').val().trim(); // Mengambil nilai dari input pencarian
-        const encodedQuery = encodeURIComponent(searchQuery); // Encode query untuk URL
+        const searchQuery = $('#search-input').val().trim(); // Mengambil nilai input pencarian
+        const encodedQuery = encodeURIComponent(searchQuery); // Mengubah query menjadi aman untuk URL
 
+        // Menampilkan animasi loading selama data diambil
         $('#search-input').html(`
             <div class="text-center">
                 <div class="spinner-border" role="status">
@@ -29,24 +32,24 @@ document.querySelectorAll("nav ul a").forEach(item => {
                 </div>
             </div>
         `);
+
+        // Permintaan AJAX untuk mendapatkan data film dari OMDb API
         $.ajax({
-            url: 'https://www.omdbapi.com',
+            url: 'https://www.omdbapi.com', // URL API
             type: 'get',
             dataType: 'json',
             data: {
-                'apikey': 'fd868951',
-                's': searchQuery,
-                'page': page
+                'apikey': 'fd868951', // API key
+                's': searchQuery, // Query pencarian
+                'page': page // Halaman pencarian
             },
             success: function(result) {
-                
                 if (result.Response === "True") {
+                    // Jika film ditemukan, tampilkan film
                     let movies = result.Search;
+                    $('#movie-list').empty(); // Mengosongkan hasil pencarian sebelumnya
 
-                    // Membersihkan hasil sebelumnya
-                    $('#movie-list').empty();
-
-                    // Menampilkan film yang diperoleh dari API
+                    // Loop untuk menampilkan setiap film yang ditemukan
                     $.each(movies, function(i, data) {
                         $('#movie-list').append(`
                             <div class="">
@@ -55,30 +58,29 @@ document.querySelectorAll("nav ul a").forEach(item => {
                                     <div class="card-body">
                                         <h5 class="card-title">${data.Title}</h5>
                                         <h6 class="card-subtitle mb-2 s">${data.Year}</h6>
-                                        <a href="#" class="btn-detail see-detail" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${data.imdbID}" >See Details<svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" clip-rule="evenodd"></path> </svg></a>
+                                        <a href="#" class="btn-detail see-detail" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${data.imdbID}" >See Details</a>
                                     </div>
                                 </div>
                             </div>
                         `);
                     });
 
-                    // Menampilkan tombol pagination jika ada hasil yang ditemukan
+                    // Menampilkan tombol pagination (sebelumnya/berikutnya) jika film ditemukan
                     if (movies.length > 0) {
                         $('#pagination').html(`
-                            <button id="prev-page" class="btn-prev me-2" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
+                            <button id="prev-page" class="btn-prev" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
                             <button id="next-page" class="btn-next" ${movies.length < 10 ? 'disabled' : ''}>Next</button>
                         `);
                     } else {
-                        $('#pagination').empty(); // Sembunyikan tombol jika tidak ada hasil
+                        $('#pagination').empty(); // Sembunyikan pagination jika tidak ada film
                     }
 
                     // Mengubah URL di address bar sesuai dengan pencarian dan halaman
                     const newUrl = `${window.location.pathname}?query=${encodedQuery}&page=${page}`;
-                        history.pushState(null, '', newUrl);
+                    history.pushState(null, '', newUrl);
 
-                    // Menggulir halaman ke atas setelah memuat data
+                    // Scroll ke atas setelah data dimuat
                     $('html, body').animate({ scrollTop: 0 }, 'fast');
-
                 } else {
                     // Jika tidak ada film yang ditemukan, tampilkan pesan error
                     $('#movie-list').html(`
@@ -86,70 +88,59 @@ document.querySelectorAll("nav ul a").forEach(item => {
                             <h1 class="text-center">${result.Error}</h1>
                         </div>
                     `);
-
-                    // Sembunyikan pagination
-                    $('#pagination').empty();
-
-                    // Menggulir halaman ke atas setelah memuat data
-                    $('html, body').animate({ scrollTop: 0 }, 'fast');
+                    $('#pagination').empty(); // Sembunyikan pagination
+                    $('html, body').animate({ scrollTop: 0 }, 'fast'); // Scroll ke atas
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.error('AJAX error:', textStatus, errorThrown); // Logging error for debugging
-
-                // Sembunyikan pagination
-                $('#pagination').empty();
-
-                // Menggulir halaman ke atas juga saat terjadi error jaringan
-                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                // Menangani error jaringan dan AJAX
+                console.error('AJAX error:', textStatus, errorThrown);
+                $('#pagination').empty(); // Sembunyikan pagination
+                $('html, body').animate({ scrollTop: 0 }, 'fast'); // Scroll ke atas
             }
         });
     }
 
-    // Event listener untuk tombol pencarian atau saat menekan Enter
+    // Event listener untuk pencarian saat tombol Enter ditekan
     $('#search-input').on('keydown', function(event) {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Mencegah perilaku default (form submit)
-            $('#search-button').click(); // Memicu klik tombol pencarian
+            event.preventDefault(); // Mencegah submit form default
+            $('#search-button').click(); // Memicu tombol pencarian
         }
     });
 
     // Event listener untuk tombol pencarian
-$('#search-button').off('click').on('click', function(event) {
-    event.stopPropagation();
-    let searchQuery = $('#search-input').val().trim();
-    if (searchQuery.trim() === "") {
-        alert("⚠ Please enter a valid movie title before searching.");
-    }
-     else {
-        currentPage = 1;
-        fetchMovies(currentPage);
-    }
-});
-    
-        
-
-    // Event delegation untuk tombol Previous
-    $('#pagination').on('click', '#prev-page', function() {
-        if (currentPage > 1) {
-            currentPage--;
-            fetchMovies(currentPage);
+    $('#search-button').off('click').on('click', function(event) {
+        event.stopPropagation();
+        let searchQuery = $('#search-input').val().trim();
+        if (searchQuery.trim() === "") {
+            alert("⚠ Please enter a valid movie title before searching."); // Validasi input kosong
+        } else {
+            currentPage = 1; // Reset halaman ke 1 saat pencarian baru
+            fetchMovies(currentPage); // Panggil fungsi untuk mengambil film
         }
     });
 
-    // Event delegation untuk tombol Next
+    // Event delegation untuk tombol Previous (halaman sebelumnya)
+    $('#pagination').on('click', '#prev-page', function() {
+        if (currentPage > 1) {
+            currentPage--; 
+            fetchMovies(currentPage); // Ambil film untuk halaman baru
+        }
+    });
+
+    // Event delegation untuk tombol Next (halaman berikutnya)
     $('#pagination').on('click', '#next-page', function() {
-        currentPage++;
-        fetchMovies(currentPage);
+        currentPage++; 
+        fetchMovies(currentPage); // Ambil film untuk halaman baru
     });
 });
 
-
-//  Ajax Detail
+// Logika AJAX untuk mendapatkan detail film dan menampilkannya di modal
 $('#movie-list').on('click', '.see-detail', function (event) {
     event.preventDefault();
     
-    // Clear the modal content
+    // Tampilkan animasi loading di modal sebelum data dimuat
     $('.modal-body').html(`
         <div class="text-center">
             <div class="spinner-border" role="status">
@@ -158,18 +149,18 @@ $('#movie-list').on('click', '.see-detail', function (event) {
         </div>
     `);
     
+    // Permintaan AJAX untuk mendapatkan detail film berdasarkan ID film
     $.ajax({
-        url: 'https://www.omdbapi.com',
+        url: 'https://www.omdbapi.com', // URL API
         type: 'get',
         dataType: 'json',
         data: {
-            'apikey': 'fd868951',
-            'i': $(this).data('id')
+            'apikey': 'fd868951', 
+            'i': $(this).data('id') // ID film untuk mendapatkan detail
         },
-
-        success: function (movie){
-
+        success: function (movie) {
             if (movie.Response === "True") {
+                // Menampilkan detail film di dalam modal
                 const ratings = movie.Ratings.map(rating => 
                     `<li>${rating.Source}: <i class="fas fa-star"></i>${rating.Value}</li>`
                 ).join('');
@@ -177,7 +168,7 @@ $('#movie-list').on('click', '.see-detail', function (event) {
                 $('.modal-body').html(`
                     <div class="container-fluid">
                         <div class="row">
-                            <div id="poster">
+                            <div class="col-md-4" id="poster">
                                 <img src="${movie.Poster}" class="img-fluid" alt="${movie.Title} Poster">
                             </div>
                             <div class="col-md-8">
@@ -207,10 +198,6 @@ $('#movie-list').on('click', '.see-detail', function (event) {
                         </div>
                     </div>`)
             }
-
         }
     });
-        
 });
-
-

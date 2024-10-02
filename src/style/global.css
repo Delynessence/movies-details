@@ -13,14 +13,16 @@ html, body {
 /* Navbar Styles */
 nav {
   background-color: black;
-  opacity: 0.8;
+  opacity: 0.9; /* Mengurangi transparansi agar lebih solid */
   display: flex;
-  /* position:sticky;
-  top: 0; */
+  position: fixed; /* Memastikan navbar tetap berada di atas saat di-scroll */
+  top: 0; /* Navbar akan tetap berada di bagian atas halaman */
   justify-content: space-between;
   padding: 1rem 2rem;
-  z-index: 1000;
+  z-index: 1000; /* Memastikan navbar berada di atas elemen lainnya */
+  width: 100%;
 }
+
 
 nav a {
   text-decoration: none;
@@ -88,6 +90,7 @@ nav div img {
 .title{
   text-align: center;
   color: white;
+  margin-top: 1.5cm;
 }
 
 /* Search Input Styles */
@@ -276,6 +279,7 @@ nav div img {
   overflow: hidden;
   font-size: 15px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .icon {
@@ -364,9 +368,9 @@ nav div img {
     text-align: center;
 }
 
-#poster img{
-  margin-bottom: 2rem;
-}
+  #poster img{
+    margin-bottom: 2rem;
+  }
 
   .title{
     margin-top:2cm;
@@ -405,11 +409,11 @@ footer {
   margin: 0 10px;
 }
 
-.footer-links a {
-  color: #fff;
+.footer-links a, .footer-content a {
+  color: #ffffff;
   text-decoration: none;
 }
 
-.footer-links a:hover {
+.footer-links a:hover, .footer-content a:hover {
   text-decoration: underline;
 }
